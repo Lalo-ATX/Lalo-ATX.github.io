@@ -69,7 +69,14 @@
     var seqIndex = null;
     var ready = 1;
 
-    var context = new AudioContext();
+    var context;
+    if ( window.hasOwnProperty('webkitAudioContext') &&
+	    !window.hasOwnProperty('AudioContext') ) {
+      context = new webkitAudioContext();
+    } else {
+      context = new AudioContext();
+    }
+
     var o = null;
     var g = null;
     function sound(frequency, type, length){
